@@ -1,0 +1,51 @@
+﻿
+@model Micro.Models.UserLogin
+
+@{
+    ViewBag.Title = "Login Page";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h4>Login</h4>
+    @if (ViewBag.LoginMessage != null)
+    {
+        <h2 class="text-danger">@ViewBag.LoginMessage</h2>
+
+    }
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" autocomplete="off" class="form-control" name="username" />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="password" autocomplete="off" class="form-control" name="password" />
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Login" formaction="/Home/LoginIndex" class="btn btn-group-sm btn-primary" />
+
+
+        </div>
+    </div>
+
+    <h3>Login Using External Provider</h3>
+
+    @Html.ActionLink("Login Using Google", "RedirectToGoogle","Account")
+
+
+</div>
+}
